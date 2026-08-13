@@ -13,8 +13,6 @@ public record ReviewRequest(
         Long movieId,
 
         @NotNull
-        Long userId,
-
         @Min(1)
         @Max(5)
         Integer rating

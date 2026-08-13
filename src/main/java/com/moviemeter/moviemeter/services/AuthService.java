@@ -3,6 +3,7 @@ package com.moviemeter.moviemeter.services;
 import com.moviemeter.moviemeter.dto.AuthResponse;
 import com.moviemeter.moviemeter.dto.LoginRequest;
 import com.moviemeter.moviemeter.dto.RegisterRequest;
+import com.moviemeter.moviemeter.exception.BadRequestException;
 import com.moviemeter.moviemeter.models.Role;
 import com.moviemeter.moviemeter.models.User;
 import com.moviemeter.moviemeter.repositories.UserRepository;
@@ -24,7 +25,7 @@ public class AuthService {
 
     public AuthResponse register(RegisterRequest request) {
         if(userRepository.existsByEmail(request.email())){
-            throw new IllegalArgumentException("Email already in use");
+            throw new BadRequestException("Email already in use");
         }
 
         var user = User.builder()
