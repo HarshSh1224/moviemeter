@@ -31,8 +31,9 @@ public class SecurityConfig {
         http
             .csrf(AbstractHttpConfigurer::disable) // Disabled because JWTs are immune to traditional CSRF attacks
             .authorizeHttpRequests(auth -> auth
-                    .requestMatchers("/api/v1/auth/**").permitAll() // Public endpoints (login/register)
-                    .anyRequest().authenticated()                  // All other endpoints require authentication
+                .requestMatchers("/auth/**").permitAll()
+                .requestMatchers("/error").permitAll()
+                .anyRequest().authenticated()             // All other endpoints require authentication
             )
             .sessionManagement(session -> session
                     .sessionCreationPolicy(SessionCreationPolicy.STATELESS) // Do not store session state on server
